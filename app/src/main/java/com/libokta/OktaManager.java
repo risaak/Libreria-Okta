@@ -1,7 +1,10 @@
 package com.libokta;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+
+import com.dacompsc.general.base.BaseSharedActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -22,7 +25,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class OktaManager extends AppCompatActivity implements OktaInterface.Presenter {
+public class OktaManager extends BaseSharedActivity implements OktaInterface.Presenter {
     private OktaInterface.View mView;
     public static final MediaType MEDIA_TYPE = MediaType.parse("application/json");
     private static String callbackURI = "impella://callback";
@@ -39,6 +42,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
         codeVerifier();
         codeChange();
         OkHttpClient client = new OkHttpClient();
+
         String postBody = "{\n" +
                 "   \"grant_type\": \"authorization_code\",\n" +
                 "   \"code\": \"" + code + "\",\n" +
@@ -47,6 +51,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                 "   \"redirect_uri\": \"" + callbackURI + "\", \n" +
                 "   \"code_verifier\": \"" + codeVerifier + "\" \n" +
                 "}";
+
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
 
@@ -248,6 +253,105 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
         });
     }
 
+    @Override
+    public void changePassword(String userId, String urlDomain, String apiKey,String oldPassword,String newPassword) {
+        OkHttpClient client = new OkHttpClient();
+
+        String postBody = "{" +
+                "   \"oldPassword\": {" +
+                "   \"value\": \"" + oldPassword +
+                "}," +
+                "   \"newPassword\": {" +
+                "   \"value\":\"" + newPassword + "}" +
+                "}";
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+
+        Request request = new Request.Builder()
+                .url(urlDomain +"/api/v1/users/"+ userId+"/credentials/change_password")
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final JSONObject json = new JSONObject(myResponse);
+                            mView.resultChangePassword(json);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+
+    }
+
+    @Override
+    public void forgetPassword(String userName, String urlDomain) {
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        String link="/myapp/some/deep/link/i/want/to/return/to";
+        try {
+            postdata.put("username", userName);
+            postdata.put("factorType", "EMAIL");
+            postdata.put("relayState", link);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/authn/recovery/password")
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final JSONObject json = new JSONObject(myResponse);
+                            mView.resultForgotPassowrd(json);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+
+
+    }
+
 
     private void codeVerifier() {
         SecureRandom sr = new SecureRandom();
@@ -325,7 +429,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                     public void run() {
                         try {
                             JSONObject json = new JSONObject(myResponse);
-
+                            mView.resultCreateUser(json);
                         } catch (JSONException e) {
 
                             e.printStackTrace();
@@ -373,5 +477,10 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                 });
             }
         });
+    }
+
+    @Override
+    public Toolbar getToolbar() {
+        return null;
     }
 }
