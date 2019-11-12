@@ -1,4 +1,4 @@
-package com.libokta;
+package LibreriaOkta;
 
 import org.json.JSONObject;
 
@@ -15,7 +15,7 @@ public interface OktaInterface {
 
         void resultChangePassword(JSONObject result);
 
-        void resultForgotPassowrd(JSONObject json);
+        void resultForgotPassowrd(JSONObject result);
 
     }
 

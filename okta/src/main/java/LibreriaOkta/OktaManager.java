@@ -1,6 +1,5 @@
-package com.libokta;
+package LibreriaOkta;
 
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 

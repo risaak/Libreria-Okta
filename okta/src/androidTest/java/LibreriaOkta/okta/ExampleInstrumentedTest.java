@@ -1,4 +1,4 @@
-package com.okta;
+package LibreriaOkta.okta;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

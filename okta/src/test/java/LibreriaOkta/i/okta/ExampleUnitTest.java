@@ -1,4 +1,4 @@
-package com.okta;
+package LibreriaOkta.i.okta;
 
 import org.junit.Test;
 

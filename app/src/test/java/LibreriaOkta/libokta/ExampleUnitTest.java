@@ -1,4 +1,4 @@
-package com.libokta;
+package LibreriaOkta.libokta;
 
 import org.junit.Test;
 
