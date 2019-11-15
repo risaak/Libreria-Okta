@@ -1,5 +1,7 @@
 package LibreriaOkta;
 
+import android.webkit.WebView;
+
 import org.json.JSONObject;
 
 public interface OktaInterface {
@@ -17,12 +19,14 @@ public interface OktaInterface {
 
         void resultForgotPassowrd(JSONObject result);
 
+        void resultchangePasswordNoData(JSONObject result);
+
     }
 
     interface Presenter {
-        void getTokenWithCode(String clientId, String urlDomain);
+        void getTokenWithCode(String clientId, String urlDomain, String code, String codeVerified);
 
-        void SingIn(final String userName, String password, String urlDomain, String apikey);
+        void SingIn(String userName, String password, String urlDomain, String apikey, String clientId);
 
         void createUser(String firstName, String lastName, String title, String institution, String country, String state,
                         String city, String email, String password, String urlDomain, boolean isProfessional, boolean receiveInformation,
@@ -32,7 +36,11 @@ public interface OktaInterface {
 
         void changePassword(String userId, String urlDomain, String apiKey, String oldPassword, String newPassword);
 
-        void forgetPassword(String userName, String urlDomain);
+        void changePasswordNoData(String userId, String urlDomain, String apiKey);
+
+        void forgetPassword(String userName, String urlDomain, String apikey);
+
+        void getCode(String urlDomain, String clientId, WebView view, JSONObject json);
 
 
     }

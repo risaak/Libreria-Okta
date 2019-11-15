@@ -1,9 +1,17 @@
 package LibreriaOkta;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.dacompsc.general.base.BaseSharedActivity;
+import com.okta.R;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -11,12 +19,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Random;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,7 +35,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class OktaManager extends BaseSharedActivity implements OktaInterface.Presenter {
+public class OktaManager extends AppCompatActivity implements OktaInterface.Presenter {
     private OktaInterface.View mView;
     public static final MediaType MEDIA_TYPE = MediaType.parse("application/json");
     private static String callbackURI = "impella://callback";
@@ -32,35 +43,23 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
     private String code;
     private String codeVerifier;
 
+
     public OktaManager(OktaInterface.View mView) {
         this.mView = mView;
     }
 
+    public OktaManager() {
+    }
+
     @Override
-    public void getTokenWithCode(String clientId, String urlDomain) {
-        codeVerifier();
-        codeChange();
+    public void getTokenWithCode(String clientId, String urlDomain, String code, String codeVerified) {
         OkHttpClient client = new OkHttpClient();
-
-        String postBody = "{\n" +
-                "   \"grant_type\": \"authorization_code\",\n" +
-                "   \"code\": \"" + code + "\",\n" +
-                "   \"scope\": \"" + scope + "\",\n" +
-                "   \"client_id\": \"" + clientId + "\",\n" +
-                "   \"redirect_uri\": \"" + callbackURI + "\", \n" +
-                "   \"code_verifier\": \"" + codeVerifier + "\" \n" +
-                "}";
-
-
-        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+        MediaType mediaType = MediaType.parse("multipart/form-data");
+        RequestBody body = new FormBody.Builder().add("scope", scope).add("client_id", clientId).add("code_verifier", codeVerified)
+                .add("redirect_uri", callbackURI).add("code", code).add("grant_type", "authorization_code").build();
 
         Request request = new Request.Builder()
-                .url(urlDomain + "/oauth2/default/v1/token")
-                .header("Content-Type", "application/x-www-form-urlencoded")
-                .header("Accept", "application/json")
-                .post(body)
-                .build();
-
+                .url(urlDomain + "/oauth2/default/v1/token").post(body).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -88,8 +87,9 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
 
     }
 
+
     @Override
-    public void SingIn(final String userName, String password, final String urlDomain, final String apikey) {
+    public void SingIn(final String userName, String password, final String urlDomain, final String apikey, final String clientId) {
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -218,7 +218,7 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
         String postBody = "";
         RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
         Request request = new Request.Builder()
-                .url(urlDomain + "/api/v1/users/" + userId + "/lifecycle/activate?sendEmail=false")
+                .url(urlDomain + "/api/v1/users/" + userId + "/lifecycle/activate")
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "SSWS " + apiKey)
@@ -243,6 +243,8 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
                             mView.resultActivationEmail(json);
 
                         } catch (JSONException e) {
+                            JSONObject json = new JSONObject();
+                            mView.resultActivationEmail(json);
                             e.printStackTrace();
                         }
 
@@ -253,20 +255,17 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
     }
 
     @Override
-    public void changePassword(String userId, String urlDomain, String apiKey,String oldPassword,String newPassword) {
+    public void changePassword(String userId, String urlDomain, String apiKey, String oldPassword, String newPassword) {
         OkHttpClient client = new OkHttpClient();
 
-        String postBody = "{" +
-                "   \"oldPassword\": {" +
-                "   \"value\": \"" + oldPassword +
-                "}," +
-                "   \"newPassword\": {" +
-                "   \"value\":\"" + newPassword + "}" +
-                "}";
+        String postBody = "{  \"oldPassword\":{\"value\":\"" + oldPassword + "\"},\n" +
+                "   \"newPassword\":{\"value\":\"" + newPassword + "\"} }";
+
+
         RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
 
         Request request = new Request.Builder()
-                .url(urlDomain +"/api/v1/users/"+ userId+"/credentials/change_password")
+                .url(urlDomain + "/api/v1/users/" + userId + "/credentials/change_password")
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "SSWS " + apiKey)
@@ -291,6 +290,8 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
                             mView.resultChangePassword(json);
 
                         } catch (JSONException e) {
+                            JSONObject json = new JSONObject();
+                            mView.resultChangePassword(json);
                             e.printStackTrace();
                         }
 
@@ -302,23 +303,61 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
     }
 
     @Override
-    public void forgetPassword(String userName, String urlDomain) {
+    public void changePasswordNoData(String userId, String urlDomain, String apiKey) {
         OkHttpClient client = new OkHttpClient();
-        JSONObject postdata = new JSONObject();
-        String link="/myapp/some/deep/link/i/want/to/return/to";
-        try {
-            postdata.put("username", userName);
-            postdata.put("factorType", "EMAIL");
-            postdata.put("relayState", link);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        String postBody = "";
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+
         Request request = new Request.Builder()
-                .url(urlDomain + "/api/v1/authn/recovery/password")
+                .url(urlDomain + "/api/v1/users/" + userId + "/credentials/change_password")
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final JSONObject json = new JSONObject(myResponse);
+                            mView.resultchangePasswordNoData(json);
+
+                        } catch (JSONException e) {
+                            JSONObject json = new JSONObject();
+                            mView.resultchangePasswordNoData(json);
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void forgetPassword(String userName, String urlDomain, String apikey) {
+        OkHttpClient client = new OkHttpClient();
+
+        String postBody = "";
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/users/" + userName + "/credentials/forgot_password")
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apikey)
                 .post(body)
                 .build();
 
@@ -340,6 +379,8 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
                             mView.resultForgotPassowrd(json);
 
                         } catch (JSONException e) {
+                            JSONObject json = new JSONObject();
+                            mView.resultForgotPassowrd(json);
                             e.printStackTrace();
                         }
 
@@ -478,8 +519,47 @@ public class OktaManager extends BaseSharedActivity implements OktaInterface.Pre
         });
     }
 
-    @Override
-    public Toolbar getToolbar() {
-        return null;
+    public void getCode(final String urlDomain, final String clientId, WebView view, JSONObject json) {
+        String sesionToken = "";
+        try {
+            sesionToken = json.getString("sessionToken");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        codeVerifier();
+        codeChange();
+        String code1 = code;
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 64;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        String state = buffer.toString();
+
+        String dataUrl = urlDomain + "/oauth2/default/v1/authorize?client_id=" + clientId + "&response_type=code&response_mode=fragment&scope=" + scope + "&redirect_uri=" + callbackURI + "&state=" + state + "&code_challenge_method=S256&code_challenge=" + codeVerifier + "&sessionToken=" + sesionToken;
+
+        view.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                int index = url.indexOf("code");
+                if (index != -1) {
+                    int indexEnd = url.indexOf("&state");
+                    String resultCode = url.substring(index + 5, indexEnd);
+                    getTokenWithCode(clientId, urlDomain, resultCode, code);
+                    // mView.resultPeticion(resultCode,code);
+                } else {
+                    final JSONObject json = new JSONObject();
+                    mView.resultToken(json);
+                }
+
+            }
+        });
+        view.loadUrl(dataUrl);
     }
+
 }
