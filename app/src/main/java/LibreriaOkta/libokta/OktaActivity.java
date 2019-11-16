@@ -73,10 +73,7 @@ public WebView mView;
 
     }
 
-    @Override
-    public void resultPeticion(String code,String codeve) {
-        mPresenter.getTokenWithCode("0oa1r27qreeuNSDYU357","https://dev-575230.okta.com",code,codeve);
-    }
+
 
 
 }
