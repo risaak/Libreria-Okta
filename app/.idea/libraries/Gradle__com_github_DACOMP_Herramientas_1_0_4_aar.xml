@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.DACOMP:Herramientas:1.0.4@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/31f369610ec9d685ee3c64e508664586/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/31f369610ec9d685ee3c64e508664586/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.DACOMP/Herramientas/1.0.4/68c27a3dde6cbddf847f79c47a8bb371ef93081b/Herramientas-1.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
