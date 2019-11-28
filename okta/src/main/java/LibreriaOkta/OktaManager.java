@@ -562,4 +562,121 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
         view.loadUrl(dataUrl);
     }
 
+    @Override
+    public void createUserWithoutCredentials(final String firstName, final String lastName, final String title, final String institution, final String country, final String state, final String city, final String email, final String urlDomain, final boolean isProfessional, final boolean receiveInformation, final String apiKey, final String clientId) {
+        OkHttpClient client = new OkHttpClient();
+        String postBody = "{\n" +
+                "   \"profile\": {\n" +
+                "   \"login\": \"" + email + "\",\n" +
+                "   \"email\": \"" + email + "\",\n" +
+                "   \"firstName\": \"" + firstName + "\",\n" +
+                "   \"lastName\": \"" + lastName + "\",\n" +
+                "   \"title\": \"" + title + "\"" + ",\n" +
+                "   \"city\": \"" + city + "\"" + ",\n" +
+                "   \"state\": \"" + state + "\"" + "\n" +
+                "} \n" +
+                "}";
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/users?activate=false")
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(myResponse);
+                            if (!json.getString("id").equals("")) {
+                                dataUserWithoutCredentials( institution, urlDomain, isProfessional
+                                        , receiveInformation, apiKey, json, clientId);
+                            }
+
+                        } catch (JSONException e) {
+                            JSONObject json;
+                            try {
+                                mView.resultCreateUser(json = new JSONObject(myResponse));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+    }
+
+    private void dataUserWithoutCredentials( String institution, String urlDomain, boolean isProfessional, boolean receiveInformation,
+                                            String apiKey, JSONObject jsonData, String clientId) {
+        String userId = "";
+
+        OkHttpClient client = new OkHttpClient();
+        try {
+            userId = jsonData.getString("id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String postBody = "{\n" +
+                "   \"id\": \"" + userId + "\",\n" +
+                "   \"scope\": \"USER\",\n" +
+                "   \"profile\": {\n" +
+                "   \"instituteName\": \"" + institution + "\",\n" +
+                "   \"professional\": \"" + isProfessional + "\",\n" +
+                "   \"receiveInformation\": \"" + receiveInformation + "\"" + "\n" +
+                "} \n" +
+                "}";
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/apps/" + clientId + "/users")
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(myResponse);
+                            mView.resultCreateUser(json);
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+
+    }
+
 }

@@ -42,6 +42,9 @@ public interface OktaInterface {
 
         void getCode(String urlDomain, String clientId, WebView view, JSONObject json);
 
+        void createUserWithoutCredentials(String firstName, String lastName, String title, String institution, String country, String state,
+                                          String city, String email, String urlDomain, boolean isProfessional, boolean receiveInformation,
+                                          String apiKey, String clientId);
 
     }
 }
