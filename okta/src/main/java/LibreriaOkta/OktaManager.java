@@ -89,7 +89,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
 
 
     @Override
-    public void SingIn(final String userName, String password, final String urlDomain, final String apikey, final String clientId) {
+    public void SignIn(final String userName, String password, final String urlDomain, final String apikey, final String clientId) {
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -124,14 +124,14 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                         try {
                             final JSONObject json = new JSONObject(myResponse);
                             if (!json.getString("errorSummary").equals("")) {
-                                singInData(urlDomain, userName, apikey);
+                                signInData(urlDomain, userName, apikey);
                             }
 
                         } catch (JSONException e) {
                             final JSONObject json;
                             try {
                                 json = new JSONObject(myResponse);
-                                mView.resultSingIn(json);
+                                mView.resultSignIn(json);
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }
@@ -347,7 +347,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
     }
 
     @Override
-    public void forgetPassword(String userName, String urlDomain, String apikey) {
+    public void forgotPassword(String userName, String urlDomain, String apikey) {
         OkHttpClient client = new OkHttpClient();
 
         String postBody = "";
@@ -376,11 +376,11 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                     public void run() {
                         try {
                             final JSONObject json = new JSONObject(myResponse);
-                            mView.resultForgotPassowrd(json);
+                            mView.resultForgotPassword(json);
 
                         } catch (JSONException e) {
                             JSONObject json = new JSONObject();
-                            mView.resultForgotPassowrd(json);
+                            mView.resultForgotPassword(json);
                             e.printStackTrace();
                         }
 
@@ -483,7 +483,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
 
     }
 
-    public void singInData(String urlDomain, String userName, String apikey) {
+    public void signInData(String urlDomain, String userName, String apikey) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(urlDomain + "/api/v1/users/" + userName)
@@ -507,7 +507,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                     public void run() {
                         try {
                             final JSONObject json = new JSONObject(myResponse);
-                            mView.resultSingIn(json);
+                            mView.resultSignIn(json);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
