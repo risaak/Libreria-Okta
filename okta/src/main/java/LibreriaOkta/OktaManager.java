@@ -213,7 +213,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
     }
 
     @Override
-    public void resendActivationEmail(String userId, String urlDomain, String apiKey) {
+    public void ActivationEmail(String userId, String urlDomain, String apiKey) {
         OkHttpClient client = new OkHttpClient();
         String postBody = "";
         RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
@@ -252,6 +252,49 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                 });
             }
         });
+    }
+
+    @Override
+    public void resendActivationEmail(String userId, String urlDomain, String apiKey) {
+        OkHttpClient client = new OkHttpClient();
+        String postBody = "";
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/users/" + userId + "/lifecycle/reactivate?sendEmail=true")
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(myResponse);
+                            mView.resultActivationEmail(json);
+
+                        } catch (JSONException e) {
+                            JSONObject json = new JSONObject();
+                            mView.resultActivationEmail(json);
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+
     }
 
     @Override
@@ -603,7 +646,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                         try {
                             JSONObject json = new JSONObject(myResponse);
                             if (!json.getString("id").equals("")) {
-                                dataUserWithoutCredentials( institution, urlDomain, isProfessional
+                                dataUserWithoutCredentials(institution, urlDomain, isProfessional
                                         , receiveInformation, apiKey, json, clientId);
                             }
 
@@ -623,7 +666,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
         });
     }
 
-    private void dataUserWithoutCredentials( String institution, String urlDomain, boolean isProfessional, boolean receiveInformation,
+    private void dataUserWithoutCredentials(String institution, String urlDomain, boolean isProfessional, boolean receiveInformation,
                                             String apiKey, JSONObject jsonData, String clientId) {
         String userId = "";
 
