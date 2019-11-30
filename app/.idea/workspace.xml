@@ -27,21 +27,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
           <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-620">
-              <caret line="266" column="27" selection-start-line="266" selection-start-column="27" selection-end-line="266" selection-end-column="27" />
+            <state relative-caret-position="229">
+              <caret line="698" selection-start-line="698" selection-end-line="698" />
+              <folding>
+                <element signature="e#25532#26489#0" expanded="true" />
+                <element signature="e#26488#26489#0" expanded="true" />
+                <element signature="e#27298#27299#0" expanded="true" />
+                <element signature="e#27343#27344#0" expanded="true" />
+                <element signature="e#27588#28007#0" expanded="true" />
+                <element signature="e#28006#28007#0" expanded="true" />
+                <element signature="e#29516#29517#0" expanded="true" />
+                <element signature="e#29561#29562#0" expanded="true" />
+                <element signature="e#29806#30223#0" expanded="true" />
+                <element signature="e#30222#30223#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="392">
+              <caret line="51" column="88" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="88" />
             </state>
           </provider>
         </entry>
@@ -66,14 +78,19 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>create</find>
-      <find>createUser</find>
       <find>dataUser</find>
       <find>singi</find>
       <find>sing</find>
       <find>forg</find>
       <find>resen</find>
       <find>change</find>
+      <find>createUser</find>
+      <find>add</find>
+      <find>createuser</find>
+      <find>addUserToGroup</find>
+      <find>adduser</find>
+      <find>create</find>
+      <find>addu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -82,11 +99,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java" />
         <option value="$PROJECT_DIR$/src/main/java/OktaActivity.java" />
+        <option value="$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java" />
         <option value="$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java" />
-        <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/main/java/LibreriaOkta/libokta/OktaActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -311,12 +328,12 @@
       <window_info anchor="bottom" id="Run" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.30536914" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.22315437" />
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.06711409" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.06711409" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -354,25 +371,19 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>710</line>
+          <line>756</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>647</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>640</line>
+          <line>645</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>632</line>
+          <line>637</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -438,27 +449,15 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>686</line>
+          <line>732</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>675</line>
+          <line>721</line>
           <properties />
           <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>648</line>
-          <properties />
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>624</line>
-          <properties />
-          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
@@ -468,7 +467,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
-          <line>646</line>
+          <line>651</line>
           <properties />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
@@ -496,21 +495,84 @@
           <properties />
           <option name="timeStamp" value="32" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>677</line>
+          <properties />
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>698</line>
+          <properties />
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>699</line>
+          <properties />
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>673</line>
+          <properties />
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>692</line>
+          <properties />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>652</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/OktaActivity.java" />
+    <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="51" column="88" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="698" selection-start-line="698" selection-end-line="698" />
+          <folding>
+            <element signature="e#25532#26489#0" expanded="true" />
+            <element signature="e#26488#26489#0" expanded="true" />
+            <element signature="e#27298#27299#0" expanded="true" />
+            <element signature="e#27343#27344#0" expanded="true" />
+            <element signature="e#27588#28007#0" expanded="true" />
+            <element signature="e#28006#28007#0" expanded="true" />
+            <element signature="e#29516#29517#0" expanded="true" />
+            <element signature="e#29561#29562#0" expanded="true" />
+            <element signature="e#29806#30223#0" expanded="true" />
+            <element signature="e#30222#30223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/LibreriaOkta/libokta/OktaActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="78" column="57" selection-start-line="78" selection-start-column="57" selection-end-line="78" selection-end-column="57" />
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3075#3076#0" expanded="true" />
-            <element signature="e#3120#3121#0" expanded="true" />
-            <element signature="e#3191#3192#0" expanded="true" />
-            <element signature="e#3234#3235#0" expanded="true" />
+            <element signature="e#3079#3080#0" expanded="true" />
+            <element signature="e#3124#3125#0" expanded="true" />
+            <element signature="e#3195#3196#0" expanded="true" />
+            <element signature="e#3238#3239#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
+            <element signature="e#3438#3439#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -519,21 +581,7 @@
       <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-620">
-          <caret line="266" column="27" selection-start-line="266" selection-start-column="27" selection-end-line="266" selection-end-column="27" />
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
         </state>
       </provider>
     </entry>
