@@ -21,6 +21,8 @@ public interface OktaInterface {
 
         void resultchangePasswordNoData(JSONObject result);
 
+        void resultaddUserGroup(JSONObject result);
+
     }
 
     interface Presenter {
@@ -47,6 +49,6 @@ public interface OktaInterface {
         void createUserWithoutCredentials(String firstName, String lastName, String title, String institution, String country, String state,
                                           String city, String email, String urlDomain, boolean isProfessional, boolean receiveInformation,
                                           String apiKey, String clientId);
-
+        void addUserToGroup(String groupId,String userId,String urlDomain,String apiKey);
     }
 }

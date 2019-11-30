@@ -616,7 +616,12 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                 "   \"lastName\": \"" + lastName + "\",\n" +
                 "   \"title\": \"" + title + "\"" + ",\n" +
                 "   \"city\": \"" + city + "\"" + ",\n" +
+                "   \"country\": \"" + country + "\"" + ",\n" +
+                "   \"instituteName\": \"" + institution + "\",\n" +
+                "   \"professional\": \"" + isProfessional + "\",\n" +
+                "   \"receiveInformation\": \"" + receiveInformation  + "\",\n" +
                 "   \"state\": \"" + state + "\"" + "\n" +
+
                 "} \n" +
                 "}";
 
@@ -645,10 +650,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                     public void run() {
                         try {
                             JSONObject json = new JSONObject(myResponse);
-                            if (!json.getString("id").equals("")) {
-                                dataUserWithoutCredentials(institution, urlDomain, isProfessional
-                                        , receiveInformation, apiKey, json, clientId);
-                            }
+                            mView.resultCreateUser(json);
 
                         } catch (JSONException e) {
                             JSONObject json;
@@ -665,6 +667,50 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
             }
         });
     }
+
+    @Override
+    public void addUserToGroup(String groupId, String userId, String urlDomain, String apiKey) {
+
+        OkHttpClient client = new OkHttpClient();
+        String postBody ="";
+        RequestBody body = RequestBody.create(MEDIA_TYPE, "{}");
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/groups/" + groupId + "/users/"+userId)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .put(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(myResponse);
+                            mView.resultCreateUser(json);
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+
+    }
+
+
 
     private void dataUserWithoutCredentials(String institution, String urlDomain, boolean isProfessional, boolean receiveInformation,
                                             String apiKey, JSONObject jsonData, String clientId) {
@@ -721,5 +767,6 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
         });
 
     }
+
 
 }
