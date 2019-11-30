@@ -32,6 +32,8 @@ public interface OktaInterface {
                         String city, String email, String password, String urlDomain, boolean isProfessional, boolean receiveInformation,
                         String apiKey, String clientId);
 
+        void ActivationEmail(String userId, String urlDomain, String apiKey);
+
         void resendActivationEmail(String userId, String urlDomain, String apiKey);
 
         void changePassword(String userId, String urlDomain, String apiKey, String oldPassword, String newPassword);
