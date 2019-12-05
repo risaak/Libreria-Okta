@@ -14,8 +14,10 @@ import com.dacompsc.general.base.BaseSharedActivity;
 import com.okta.R;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -710,30 +712,149 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
 
     }
 
+    @Override
+    public void existingUser(String userId, String urlDomain, String apiKey) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/users/" + userId)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final JSONObject json = new JSONObject(myResponse);
+                            mView.resultExistingUser(json);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+    }
 
 
-    private void dataUserWithoutCredentials(String institution, String urlDomain, boolean isProfessional, boolean receiveInformation,
-                                            String apiKey, JSONObject jsonData, String clientId) {
-        String userId = "";
+    @Override
+    public void userGroups(String urlDomain,String userId,String apiKey) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/users/" + userId+"/groups")
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                            mView.userGroups(myResponse);
+
+
+
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void addUserExistingToGroup(String institution, String country, boolean isProfessional, boolean receiveInformation, String apiKey, String urlDomain, String groupId, String userId) {
 
         OkHttpClient client = new OkHttpClient();
-        try {
-            userId = jsonData.getString("id");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         String postBody = "{\n" +
-                "   \"id\": \"" + userId + "\",\n" +
-                "   \"scope\": \"USER\",\n" +
                 "   \"profile\": {\n" +
+                "   \"country\": \"" + country + "\"" + ",\n" +
+                "   \"instituteName\": \"" + institution + "\",\n" +
+                "   \"professional\": \"" + isProfessional + "\",\n" +
+                "   \"receiveInformation\": \"" + receiveInformation  + "\"" + "\n" +
+                "} \n" +
+                "}";
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/groups/" + groupId + "/users/"+userId)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .put(body)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(myResponse);
+                            mView.resultCreateUser(json);
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+
+    }
+
+
+    public void addDataUser(String country,String institution, String urlDomain, boolean isProfessional, boolean receiveInformation,
+                                            String apiKey,String userId) {
+
+
+        OkHttpClient client = new OkHttpClient();
+
+
+        String postBody = "{\n" +
+                "   \"profile\": {\n" +
+                "   \"country\": \"" + country + "\"" + ",\n" +
                 "   \"instituteName\": \"" + institution + "\",\n" +
                 "   \"professional\": \"" + isProfessional + "\",\n" +
                 "   \"receiveInformation\": \"" + receiveInformation + "\"" + "\n" +
                 "} \n" +
                 "}";
+
         RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
         Request request = new Request.Builder()
-                .url(urlDomain + "/api/v1/apps/" + clientId + "/users")
+                .url(urlDomain + "/api/v1/users/"+userId)
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "SSWS " + apiKey)
@@ -755,7 +876,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
                     public void run() {
                         try {
                             JSONObject json = new JSONObject(myResponse);
-                            mView.resultCreateUser(json);
+                            mView.resultAddDataUser(json);
                         } catch (JSONException e) {
 
                             e.printStackTrace();
