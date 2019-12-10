@@ -31,6 +31,8 @@ public interface OktaInterface {
 
         void resultAddDataUser(JSONObject result);
 
+        void resultResetPassword(JSONObject result);
+
     }
 
     interface Presenter {
@@ -57,16 +59,20 @@ public interface OktaInterface {
         void createUserWithoutCredentials(String firstName, String lastName, String title, String institution, String country, String state,
                                           String city, String email, String urlDomain, boolean isProfessional, boolean receiveInformation,
                                           String apiKey, String clientId);
-        void addUserToGroup(String groupId,String userId,String urlDomain,String apiKey);
 
-        void existingUser(String userId,String urlDomain,String apiKey);
+        void addUserToGroup(String groupId, String userId, String urlDomain, String apiKey);
 
-        void userGroups(String urlDomain,String userId,String apiKey);
+        void existingUser(String userId, String urlDomain, String apiKey);
+
+        void userGroups(String urlDomain, String userId, String apiKey);
 
         void addUserExistingToGroup(String institution, String country, boolean isProfessional, boolean receiveInformation,
-                                    String apiKey, String urlDomain,String groupId,String userId);
-        void addDataUser(String country,String institution, String urlDomain, boolean isProfessional, boolean receiveInformation,
-                         String apiKey,String userId);
+                                    String apiKey, String urlDomain, String groupId, String userId);
+
+        void addDataUser(String country, String institution, String urlDomain, boolean isProfessional, boolean receiveInformation,
+                         String apiKey, String userId);
+
+        void resetPassword(String urlDomain, String userId, String apikey);
 
     }
 }
