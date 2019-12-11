@@ -33,6 +33,9 @@ public interface OktaInterface {
 
         void resultResetPassword(JSONObject result);
 
+        void resultAddDataUserSignIn(JSONObject result);
+
+
     }
 
     interface Presenter {
@@ -73,6 +76,10 @@ public interface OktaInterface {
                          String apiKey, String userId);
 
         void resetPassword(String urlDomain, String userId, String apikey);
+
+        void addDataUserSignIn(String title, String city,String country,String institution,String state, String urlDomain, boolean isProfessional, boolean receiveInformation,
+                          String apiKey,String userId);
+
 
     }
 }
