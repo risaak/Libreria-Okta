@@ -889,6 +889,62 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
 
     }
 
+    public void addDataUserSignIn(String title, String city,String country,String institution,String state, String urlDomain, boolean isProfessional, boolean receiveInformation,
+                            String apiKey,String userId) {
+
+
+        OkHttpClient client = new OkHttpClient();
+
+        String postBody = "{\n" +
+                "   \"profile\": {\n" +
+                "   \"title\": \"" + title + "\"" + ",\n" +
+                "   \"city\": \"" + city + "\"" + ",\n" +
+                "   \"country\": \"" + country + "\"" + ",\n" +
+                "   \"instituteName\": \"" + institution + "\",\n" +
+                "   \"professional\": \"" + isProfessional + "\",\n" +
+                "   \"receiveInformation\": \"" + receiveInformation + "\",\n" +
+                "   \"state\": \"" + state + "\"" + "\n" +
+                "} \n" +
+                "}";
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
+        Request request = new Request.Builder()
+                .url(urlDomain + "/api/v1/users/"+userId)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "SSWS " + apiKey)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                OktaManager.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(myResponse);
+                            mView.resultAddDataUserSignIn(json);
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+
+    }
+
+
     @Override
     public void resetPassword(String urlDomain, String userId, String apikey) {
         OkHttpClient client = new OkHttpClient();
