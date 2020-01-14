@@ -7,9 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c04c170-f94d-42a7-a017-254e4c3566a3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="79" column="104" selection-start-line="79" selection-start-column="104" selection-end-line="79" selection-end-column="104" />
+            <state relative-caret-position="119">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -49,13 +49,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="932" selection-start-line="932" selection-end-line="932" />
+            <state relative-caret-position="59">
+              <caret line="422" selection-start-line="422" selection-end-line="422" />
               <folding>
-                <element signature="e#22852#23521#0" expanded="true" />
-                <element signature="e#23520#23521#0" expanded="true" />
+                <element signature="e#35855#35856#0" expanded="true" />
                 <element signature="e#35900#35901#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -71,36 +79,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>create</find>
-      <find>addu</find>
-      <find>exis</find>
-      <find>user</find>
-      <find>existin</find>
-      <find>exist</find>
-      <find>existi</find>
-      <find>signInData</find>
-      <find>userGroups</find>
-      <find>group</find>
-      <find>api/v1/groups</find>
-      <find>createu</find>
-      <find>profile</find>
-      <find>datauser</find>
-      <find>addda</find>
-      <find>resultadd</find>
-      <find>dataUserWithoutCredentials</find>
-      <find>adduser</find>
-      <find>forgot</find>
-      <find>password</find>
       <find>activate</find>
       <find>for</find>
       <find>data</find>
-      <find>sign</find>
       <find>getto</find>
       <find>code</find>
       <find>/api/v1/users/</find>
       <find>addDataUser</find>
       <find>addd</find>
       <find>createuser</find>
+      <find>lifec</find>
+      <find>lifecyc</find>
+      <find>credentials</find>
+      <find>resultF</find>
+      <find>life</find>
+      <find>lifecycle</find>
+      <find>apikey</find>
+      <find>resen</find>
+      <find>changep</find>
+      <find>view</find>
+      <find>change</find>
+      <find>sign</find>
+      <find>getcode</find>
+      <find>resultsign</find>
+      <find>signIn</find>
+      <find>signin</find>
+      <find>resultsi</find>
+      <find>signinDa</find>
+      <find>changepa</find>
+      <find>rese</find>
+      <find>forg</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,6 +138,8 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -147,18 +157,20 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
             </path>
+            <path>
+              <item name="Libreria-Okta" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/sdk" />
     <property name="device.picker.selection" value="ZY2243TM3F" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Okta final/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../impella subir/app" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunDashboard">
@@ -301,7 +313,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.12556732" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22239032" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -312,11 +324,11 @@
       <window_info anchor="bottom" id="Run" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.30872482" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" visible="true" weight="0.30872482" />
       <window_info anchor="bottom" id="Terminal" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50075644" side_tool="true" visible="true" weight="0.30872482" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.09563758" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49848714" weight="0.08557047" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -707,6 +719,36 @@
           <properties />
           <option name="timeStamp" value="100" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>408</line>
+          <properties />
+          <option name="timeStamp" value="102" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>305</line>
+          <properties />
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>312</line>
+          <properties />
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>333</line>
+          <properties />
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java</url>
+          <line>401</line>
+          <properties />
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -720,20 +762,20 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/LibreriaOkta/libokta/OktaAcivity.java" />
     <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="79" column="104" selection-start-line="79" selection-start-column="104" selection-end-line="79" selection-end-column="104" />
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../okta/src/main/java/LibreriaOkta/OktaManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="932" selection-start-line="932" selection-end-line="932" />
+        <state relative-caret-position="59">
+          <caret line="422" selection-start-line="422" selection-end-line="422" />
           <folding>
-            <element signature="e#22852#23521#0" expanded="true" />
-            <element signature="e#23520#23521#0" expanded="true" />
+            <element signature="e#35855#35856#0" expanded="true" />
             <element signature="e#35900#35901#0" expanded="true" />
           </folding>
         </state>
@@ -741,18 +783,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/LibreriaOkta/libokta/OktaActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+        <state relative-caret-position="1089">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
           <folding>
-            <element signature="e#4227#4228#0" expanded="true" />
-            <element signature="e#4272#4273#0" expanded="true" />
-            <element signature="e#4343#4344#0" expanded="true" />
-            <element signature="e#4386#4387#0" expanded="true" />
-            <element signature="e#4621#4622#0" expanded="true" />
-            <element signature="e#4662#4663#0" expanded="true" />
-            <element signature="e#5423#5424#0" expanded="true" />
-            <element signature="e#5466#5467#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4750#4751#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="54" />
         </state>
       </provider>
     </entry>

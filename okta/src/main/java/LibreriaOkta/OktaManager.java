@@ -399,7 +399,7 @@ public class OktaManager extends AppCompatActivity implements OktaInterface.Pres
         RequestBody body = RequestBody.create(MEDIA_TYPE, postBody);
 
         Request request = new Request.Builder()
-                .url(urlDomain + "/api/v1/users/" + userName + "/credentials/forgot_password")
+                .url(urlDomain + "/api/v1/users/" + userName + "/lifecycle/forgot_password")
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "SSWS " + apikey)
